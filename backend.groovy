@@ -1,4 +1,3 @@
-def buildPipeline(def userConfig = [:]) {
 node('master')
 {
   def rtGradle = Artifactory.newGradleBuild()
@@ -12,4 +11,3 @@ node('master')
     }
 }
 
-}
