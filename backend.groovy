@@ -17,6 +17,29 @@ node
         def buildInfo = rtGradle.run tasks: 'sonarqube'
     }
 
+    pmd canComputeNew: false,
+    defaultEncoding: '',
+    healthy: '',
+    pattern: '**/test.xml',
+
+    unHealthy: ''
+
+    publishHTML([allowMissing: true,
+    alwaysLinkToLastBuild: true,
+    keepAll: true,
+    reportDir: '/var/lib/jenkins/workspace/bnym/build/reports/tests/test',
+    reportFiles: 'index.html',
+    reportName: 'Junit Reports',
+    reportTitles: 'Junit Reports'])
+
+    publishHTML([allowMissing: true,
+    alwaysLinkToLastBuild: true,
+    keepAll: true,
+    reportDir: '/var/lib/jenkins/workspace/bnympipeline/build/reports/pmd',
+    reportFiles: 'main.html',
+    reportName: 'PMD main Reports',
+    reportTitles: 'PMD main Reports'])
+
 
     }
 } catch (e){
