@@ -51,6 +51,10 @@ node
         sh 'sudo docker push vkotteswaran/$JOB_BASE_NAME:latest'
     }
 
+  stage('DeployToDev'){
+        sh 'sudo docker stop altidemo || true && sudo docker rm altidemo || true'
+        sh 'sudo docker run --rm --memory="1400m" --cpus=0.250 --name altidemo -d -p 8085:8080 vkotteswaran/$JOB_BASE_NAME:$BUILD_ID'
+    }
 
     }
 } catch (e){
