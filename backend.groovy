@@ -1,5 +1,5 @@
 def buildPipeline(def userConfig = [:]) {
-node
+node('master')
 {
   def rtGradle = Artifactory.newGradleBuild()
     env.JAVA_HOME="${tool 'jdk8u162'}"
