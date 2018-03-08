@@ -11,6 +11,13 @@ node
            echo "check out branch ${config.gitBranch} from ${config.serviceRepo}"
            git branch: config.gitBranch, url: config.serviceRepo
     }
+
+    stage('build') {
+        rtGradle.tool = "gradle"
+        def buildInfo = rtGradle.run tasks: 'sonarqube'
+    }
+
+
     }
 } catch (e){
         echo "${e}"
