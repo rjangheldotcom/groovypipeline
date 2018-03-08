@@ -1,3 +1,6 @@
+def buildPipeline(def userConfig = [:]) {
+try {
+
 node('master')
 {
   def rtGradle = Artifactory.newGradleBuild()
@@ -11,3 +14,7 @@ node('master')
     }
 }
 
+} catch (e){
+        echo "${e}"
+}
+}
