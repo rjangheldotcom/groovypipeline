@@ -1,4 +1,5 @@
 def buildPipeline(def userConfig = [:]) {
+try {
 node
 {
   def rtGradle = Artifactory.newGradleBuild()
@@ -71,7 +72,9 @@ node
         sh 'sudo docker stop altidemoprod || true && sudo docker rm altidemoprod || true'
         sh 'sudo docker run --rm --memory="1400m" --cpus=0.250 --name altidemoprod -d -p 8083:8080 vkotteswaran/$JOB_BASE_NAME:$BUILD_ID'
     }
-
+} catch (e){
+        echo "${e}"
+}
 }
 return this;
 
