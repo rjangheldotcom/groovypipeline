@@ -72,5 +72,6 @@ node
         sh 'sudo docker run --rm --memory="1400m" --cpus=0.250 --name altidemoprod -d -p 8083:8080 vkotteswaran/$JOB_BASE_NAME:$BUILD_ID'
     }
 
-return this;
 }
+return this;
+
