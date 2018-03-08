@@ -40,6 +40,17 @@ node
     reportName: 'PMD main Reports',
     reportTitles: 'PMD main Reports'])
 
+    stage('Docker build'){
+        sh 'sudo docker login -u vkotteswaran -p Varun@33'
+        sh 'sudo docker build -t $JOB_BASE_NAME:$BUILD_ID $WORKSPACE'
+    }
+     stage('push to artifactory'){
+        sh 'sudo docker tag $JOB_BASE_NAME:$BUILD_ID vkotteswaran/$JOB_BASE_NAME:$BUILD_ID'
+        sh 'sudo docker tag $JOB_BASE_NAME:$BUILD_ID vkotteswaran/$JOB_BASE_NAME:latest'
+        sh 'sudo docker push vkotteswaran/$JOB_BASE_NAME:$BUILD_ID'
+        sh 'sudo docker push vkotteswaran/$JOB_BASE_NAME:latest'
+    }
+
 
     }
 } catch (e){
