@@ -8,7 +8,7 @@ BUILD_NUM = "${env.DEV_Build_Number}"
 sh "echo $BUILD_NUM"
   stage('DeployToQA'){
         sh 'sudo docker stop altidemoqa || true && sudo docker rm altidemoqa || true'
-       sh  "sudo docker run --rm  --memory="1400m" --cpus=0.250 --name altidemoqa -d -p 8082:8080 vkotteswaran/$JOB_BASE_NAME:$BUILD_NUM"
+       sh  "sudo docker run --rm  --name altidemoqa -d -p 8082:8080 vkotteswaran/$JOB_BASE_NAME:$BUILD_NUM"
     }
 
  stage('Deploy to Prod?') {
@@ -22,7 +22,7 @@ sh "echo $BUILD_NUM"
                      to: 'smohanram@altimetrik.com'
         }
         sh 'sudo docker stop altidemoprod || true && sudo docker rm altidemoprod || true'
-        sh "sudo docker run --rm --memory="1400m" --cpus=0.250 --name altidemoprod -d -p 8083:8080 vkotteswaran/$JOB_BASE_NAME:$BUILD_NUM"
+        sh "sudo docker run --rm --name altidemoprod -d -p 8083:8080 vkotteswaran/$JOB_BASE_NAME:$BUILD_NUM"
     }
 
     }
