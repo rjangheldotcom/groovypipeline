@@ -55,6 +55,10 @@ node
         sh 'sudo docker stop altidemo || true && sudo docker rm altidemo || true'
         sh 'sudo docker run --rm --memory="1400m" --cpus=0.250 --name altidemo -d -p 8085:8080 vkotteswaran/$JOB_BASE_NAME:$BUILD_ID'
     }
+  stage('DeployToQA'){
+        sh 'sudo docker stop altidemoqa || true && sudo docker rm altidemoqa || true'
+       sh  'sudo docker run --rm  --memory="1400m" --cpus=0.250 --name altidemoqa -d -p 8082:8080 vkotteswaran/$JOB_BASE_NAME:$BUILD_ID'
+    }
 
     }
 } catch (e){
